@@ -12,10 +12,10 @@ String pictureDtoToJson(PictureDto data) => json.encode(data.toJson());
 class PictureDto {
   String pictureId;
   int displayOrder;
-  dynamic mimeType;
-  dynamic seoFilename;
-  dynamic altAttribute;
-  dynamic titleAttribute;
+  String mimeType;
+  String seoFilename;
+  String altAttribute;
+  String titleAttribute;
 
   PictureDto({
     this.pictureId,
