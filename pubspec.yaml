@@ -13,6 +13,9 @@ dependencies:
   json_annotation: ^3.0.1
   dio: ^3.0.9
   dio_http_cache: ^0.2.5
+  dio_cookie_manager: ^1.0.0
+  cookie_jar: ^1.0.0
+  path_provider: ^1.6.5
 
 dev_dependencies:
   flutter_test:
