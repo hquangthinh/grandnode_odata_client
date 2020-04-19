@@ -16,16 +16,18 @@ class AuthInterceptor extends Interceptor {
 
   @override
   onRequest(RequestOptions options) {
-    var tokenHeader = accessToken.length > 0 ? "Bearer " + accessToken : '';
-    options.headers.update("Authorization", (_) => tokenHeader,
-        ifAbsent: () => tokenHeader);
+    if (accessToken != null && accessToken.isNotEmpty) {
+      var tokenHeader = accessToken.length > 0 ? "Bearer " + accessToken : '';
+      options.headers.update("Authorization", (_) => tokenHeader,
+          ifAbsent: () => tokenHeader);
+    }
     return super.onRequest(options);
   }
 }
 
 LogInterceptor createDebugLogInterceptor() => LogInterceptor(
       requestHeader: false,
-      responseHeader: false,
+      responseHeader: true,
       requestBody: false,
       responseBody: false,
     );
@@ -54,17 +56,20 @@ class DioFactory {
 
   static DioCacheManager getCacheManager(String baseUrl) {
     if (_cacheManager == null) {
-      print('********************* cache manager is null create it **************************');
+      print(
+          '********************* cache manager is null create it **************************');
       _cacheManager = DioCacheManager(CacheConfig(baseUrl: baseUrl));
     }
     return _cacheManager;
   }
 
   static CookieManager getCookieManager() {
-    if(_cookieManager == null) {
-      print('********************* getCookieManager manager is null create it **************************');
+    if (_cookieManager == null) {
+      print(
+          '********************* getCookieManager manager is null create it **************************');
       print(_tempCookieDir);
-      assert(_tempCookieDir != null && _tempCookieDir.isNotEmpty, 'Cookie directory is not initialized.');
+      assert(_tempCookieDir != null && _tempCookieDir.isNotEmpty,
+          'Cookie directory is not initialized.');
       _cookieManager = CookieManager(PersistCookieJar(dir: _tempCookieDir));
     }
     return _cookieManager;
